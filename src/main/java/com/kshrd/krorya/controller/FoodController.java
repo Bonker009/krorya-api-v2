@@ -250,6 +250,7 @@ public class FoodController {
         return ResponseEntity.ok(ApiResponse.<List<FoodDTO>>builder()
                 .message("Get all foods successfully")
                 .payload(foods)
+
                 .status(HttpStatus.OK)
                 .code(200)
                 .localDateTime(LocalDateTime.now())
