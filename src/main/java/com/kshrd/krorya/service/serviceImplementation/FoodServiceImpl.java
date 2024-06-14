@@ -171,8 +171,9 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public FoodDTO getFoodByIdWithoutPagination() {
-        return null;
+    public List<FoodDTO> getFoodByIdWithoutPagination() {
+        List<Food> foods = foodRepository.getAllFoodsWithoutPagination();
+        return foodDTOConvertor.toListDTO(foods);
     }
 
 

@@ -24,5 +24,5 @@ public interface FoodService {
 
     FoodDTO deleteFood(UUID id, UUID currentUserId);
 
-    FoodDTO getFoodByIdWithoutPagination();
+    List<FoodDTO> getFoodByIdWithoutPagination();
 }

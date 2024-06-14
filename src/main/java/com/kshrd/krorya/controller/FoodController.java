@@ -244,10 +244,10 @@ public class FoodController {
     }
 
     @Operation(summary = "Get all foods", description = "Get All foods without pagination")
-    @GetMapping("/noPaginationFoods")
-    public ResponseEntity<ApiResponse<FoodDTO>> getAllFoodsWithoutPagination() {
-        FoodDTO foods = foodService.getFoodByIdWithoutPagination();
-        return ResponseEntity.ok(ApiResponse.<FoodDTO>builder()
+    @GetMapping("/foods/noPaginationFoods")
+    public ResponseEntity<ApiResponse<List<FoodDTO>>> getAllFoodsWithoutPagination() {
+        List<FoodDTO> foods = foodService.getFoodByIdWithoutPagination();
+        return ResponseEntity.ok(ApiResponse.<List<FoodDTO>>builder()
                 .message("Get all foods successfully")
                 .payload(foods)
                 .status(HttpStatus.OK)

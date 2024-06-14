@@ -153,4 +153,10 @@ public interface FoodRepository {
 
     @Select("SELECT COUNT(*) > 0 FROM food_bookmark WHERE user_id = #{userId} AND food_id = #{foodId}")
     boolean isBookmarked(@Param("userId") UUID userId, @Param("foodId") UUID foodId);
+
+    @Select("""
+                SELECT * FROM krorya_db.public.foods
+            """)
+    @ResultMap("foodMapping")
+    List<Food> getAllFoodsWithoutPagination();
 }
