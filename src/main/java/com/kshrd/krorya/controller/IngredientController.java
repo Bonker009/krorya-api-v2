@@ -38,6 +38,7 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
     @Operation(summary = "Get all ingredients", description = "Retrieve all ingredients excluding those with user ID")
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<ApiResponse<List<IngredientDTO>>> getIngredients() {
 

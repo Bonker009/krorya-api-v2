@@ -157,19 +157,22 @@ public class FoodServiceImpl implements FoodService {
             throw new SearchNotFoundException("Food with ID " + id + " does not exist");
         }
 
-        // Check if the current user is the owner of the food item
         UUID foodOwnerId = foodRepository.isFoodOwner(id, currentUserId);
-        log.info("Food Owner ID: {}", foodOwnerId);
-        log.info("Current User ID: {}", currentUserId);
+
         if (foodOwnerId == null || !foodOwnerId.equals(currentUserId)) {
             throw new ForbiddenException("Current user is not the owner of the food item and cannot delete it");
         }
 
-        // Proceed with the deletion if the user is the owner
+
         Food deletedFood = foodRepository.deleteFood(id);
 
-        // Convert the deleted food entity to a DTO and return it
+
         return foodDTOConvertor.toDto(deletedFood);
+    }
+
+    @Override
+    public FoodDTO getFoodByIdWithoutPagination() {
+        return null;
     }
 
 

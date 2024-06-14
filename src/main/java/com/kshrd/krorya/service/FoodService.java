@@ -23,4 +23,6 @@ public interface FoodService {
     List<FoodDTO> getFoodByBookmarked(UUID currentUser);
 
     FoodDTO deleteFood(UUID id, UUID currentUserId);
+
+    FoodDTO getFoodByIdWithoutPagination();
 }

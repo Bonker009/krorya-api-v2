@@ -141,7 +141,7 @@ public class FoodController {
     @GetMapping("/foods/user/{userId}")
     public ResponseEntity<ApiResponse<List<FoodDTO>>> getLatestFoodsByUserId(
             @Parameter(description = "ID of user to get all foods", example = "d290f1ee-6c54-4b01-90e6-d701748f0851")
-            @PathVariable UUID userId){
+            @PathVariable UUID userId) {
         List<FoodDTO> foods = foodService.getCurrentFoodsByUserId(userId);
         return ResponseEntity.ok(
                 ApiResponse.<List<FoodDTO>>builder()
@@ -190,7 +190,7 @@ public class FoodController {
         return ResponseEntity.ok(apiResponse);
     }
 
-    @SecurityRequirement(name="bearerAuth")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Insert new food", description = "Insert a new food item")
     @PostMapping("/foods")
     public ResponseEntity<ApiResponse<FoodDTO>> insertFood(@Valid @RequestBody FoodRequest foodRequest) {
@@ -207,7 +207,7 @@ public class FoodController {
         );
     }
 
-    @SecurityRequirement(name="bearerAuth")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Update food by food ID", description = "Update a specific food by its ID")
     @PutMapping("/foods/{foodId}")
     public ResponseEntity<ApiResponse<FoodDTO>> updateFoodByFoodId(
@@ -225,7 +225,7 @@ public class FoodController {
         );
     }
 
-    @SecurityRequirement(name="bearerAuth")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Delete food by ID", description = "Delete a specific food by its ID")
     @DeleteMapping("/foods/{id}")
     public ResponseEntity<ApiResponse<FoodDTO>> deleteFood(
@@ -241,5 +241,18 @@ public class FoodController {
                         .localDateTime(LocalDateTime.now())
                         .build()
         );
+    }
+
+    @Operation(summary = "Get all foods", description = "Get All foods without pagination")
+    @GetMapping("/noPaginationFoods")
+    public ResponseEntity<ApiResponse<FoodDTO>> getAllFoodsWithoutPagination() {
+        FoodDTO foods = foodService.getFoodByIdWithoutPagination();
+        return ResponseEntity.ok(ApiResponse.<FoodDTO>builder()
+                .message("Get all foods successfully")
+                .payload(foods)
+                .status(HttpStatus.OK)
+                .code(200)
+                .localDateTime(LocalDateTime.now())
+                .build());
     }
 }
